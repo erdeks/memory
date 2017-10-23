@@ -32,6 +32,29 @@ td{
   background-size: cover;
 }
 img{
-  width:100px;
-  height:150px;
+  width: 100%;
+  height: 100%;
+}
+.back{
+  transform: rotateY( 180deg );
+}
+.front{
+  backface-visibility: hidden;
+}
+.card{
+  width: 100px;
+  height: 150px;
+}
+.card > div{
+  background-color: white;
+  transition: transform 1s;
+  position: absolute;
+  width: 100px;
+  height: 150px;
+}
+.flipped > .back{
+  transform: rotateY( 0deg );
+}
+.flipped > .front{
+  transform: rotateY( 180deg );
 }
