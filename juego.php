@@ -1,8 +1,11 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="css/tablas.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
   <script type="text/JavaScript" src="juego.js"></script>
   <title>Memory</title>
 </head>
@@ -10,6 +13,7 @@
   <?php
     $filas=$_POST["filas"];;
     $columns=$_POST["columns"];
+    $nombre = $_POST["nombre"];
     $cont=0;
     $cont2=1;
     $maxCartas = $filas*$columns/2;
@@ -47,39 +51,53 @@
       30 => "torrential_gearhulk.jpg",
       31 => "vizier_of_many_faces.jpg",
     );
-    $cartasDobles = array();
-    $cartasMix = array();
-    foreach($cartas as $key => $value){
-      $cartasDobles[] = array($key, $value);
-      $cartasDobles[] = array($key, $value);
-      if ($cont2==$maxCartas) {
-        break;
-      }
-      $cont2++;
-    }
-    while(!empty($cartasDobles)){
-      $indiceCarta = array_rand($cartasDobles);
-      $cartasMix[] = array($cartasDobles[$indiceCarta][0], $cartasDobles[$indiceCarta][1]);
-      unset($cartasDobles[$indiceCarta]);
-    }
-   ?>
-   <table>
-     <?php
-        for($x=1; $x<=$filas; $x++){
-          echo "<tr>";
-          for($y=1; $y<=$columns; $y++){
-            echo "<td>";
-            echo '<div carta="'.$cartasMix[$cont][0].'" class="card">';
-            echo "<div class='back'><img src='img/".$cartasMix[$cont][1]."'></div>";
-            echo "<div class='front'><img src='img/dorso.jpeg'></div>";
-            echo "</div>";
-            echo "</td>";
-            $cont++;
-          }
-          echo "</tr>";
+    if(!isset($_SESSION["cartasMix"])){
+      $cartasDobles = array();
+      $cartasMix = array();
+      foreach($cartas as $key => $value){
+        $cartasDobles[] = array($key, $value);
+        $cartasDobles[] = array($key, $value);
+        if ($cont2==$maxCartas) {
+          break;
         }
+        $cont2++;
+      }
+
+      while(!empty($cartasDobles)){
+        $indiceCarta = array_rand($cartasDobles);
+        $cartasMix[] = array($cartasDobles[$indiceCarta][0], $cartasDobles[$indiceCarta][1]);
+        unset($cartasDobles[$indiceCarta]);
+      }
+      $_SESSION["cartasMix"]= $cartasMix;
+    }
+    echo '<form id="hform" style="display:none;" method="post" action="puntuacion.php">
+      <input name="hnombre" id="hnombre" value="'.$nombre.'"/>
+      <input name="hscore" id="hscore"/>
+      <input type="Submit" id="hsend"/>
+    </form>';
+   ?>
+
+   <h2>MTG Memory</h2>
+     <?php
+      echo "<a href='tablero.php'>BACK</a>";
+      echo "<h3>Intentos: <span id='intentos'></span> Nombre: ".$nombre."</h3>";
+      echo "<table>";
+      for($x=1; $x<=$filas; $x++){
+        echo "<tr>";
+        for($y=1; $y<=$columns; $y++){
+          echo "<td>";
+          echo '<div carta="'.$_SESSION["cartasMix"][$cont][0].'" class="card">';
+          echo "<div class='back'><img src='img/".$_SESSION["cartasMix"][$cont][1]."'></div>";
+          echo "<div class='front'><img src='img/dorso.jpeg'></div>";
+          echo "</div>";
+          echo "</td>";
+          $cont++;
+        }
+        echo "</tr>";
+      }
+      echo "</table>";
      ?>
 
-   </table>
+
 </body>
 </html>

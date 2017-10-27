@@ -8,11 +8,14 @@ function flip(){
 }*/
 var cardsFlipped = []; //Array donde almacena las cartas que se han volteado hacia arriba
 var block = false; //Variable para evitar que se pueda girar las cartas
-var intentos = 0; //Numero de intentos que lleva el usuario
+var score = 0; //Numero de intentos que lleva el usuario
 var cardsDown = 0; //Numero de cargas que estan boca abajo
+var nombre="";
 
 function inicializar() {
+	nombre=document.getElementById("hnombre").value;
 	addEventClickListener();
+	setIntentos();
 }
 
 //Agregar el evento click a las cartas y programar su funcionamiento
@@ -39,7 +42,7 @@ function addEventClickListener(){
 				//Cuando las 2 cartas estan boca arriba
 				if(cardsFlipped.length == 2){
 					block = true;
-					intentos ++;
+					score ++;
 					var cardRepe = cardsFlipped[0].getAttribute("carta") == cardsFlipped[1].getAttribute("carta");
 
 					//Si las cartas son iguales
@@ -70,8 +73,13 @@ function addEventClickListener(){
 	}
 }
 function finJuego(){
-	alert("fi juego");
-  window.location.href="ranking.php";
+
+	setTimeout(function(){
+		alert("fi juego");
+		document.getElementById("hnombre").value=nombre;
+		document.getElementById("hscore").value=score;
+		document.getElementById("hsend").form.submit();
+	}, 1000);
 
 
 }
@@ -85,5 +93,5 @@ function desbloquear(){
 
 //Metodo para actualizar los intentos que se muestan en la web
 function setIntentos(){
-	//document.getElementById("intentos").innerHTML = intentos; poner con span id=???
+	document.getElementById("intentos").innerHTML = score;
 }
