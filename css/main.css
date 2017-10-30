@@ -91,14 +91,18 @@ h2{
   color: purple;
 }
 .mundial{
-  margin-top: 13.5%;;
+  margin-top: 5%;;
   margin-left: 10%;
   float:left;
+  overflow-y: auto;
+  max-height: 500px;
 }
 .local{
-  margin-top: 13.5%;
+  margin-top: 5%;
   margin-right: 10%;
   float: right;
+  overflow-y: auto;
+  max-height: 500px;
 }
 .reestart{
   margin-top: 13.5;

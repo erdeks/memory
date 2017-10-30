@@ -6,6 +6,19 @@
   session_destroy();
   session_start();
   $_SESSION["rlocal"]=$rlocal;
+  function burbuja($array){
+    for($i=1;$i<count($array);$i++){
+      for($j=0;$j<count($array)-$i;$j++){
+        if($array[$j]>$array[$j+1]){
+          $k=$array[$j+1];
+          $array[$j+1]=$array[$j];
+          $array[$j]=$k;
+        }
+      }
+    }
+    return $array;
+  }
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +42,7 @@
       }
     }
     fclose($fichero);
+    $contenido=burbuja($contenido);
     echo "<div class='mundial'>";
     echo "<h2>Ranquing Mundial</h2>";
     echo "<table class='r'>";
@@ -51,6 +65,7 @@
     echo "<th class='cabecera'>Jugador</th>";
     echo "<th class='cabecera'>Intentos</th>";
     echo "</tr>";
+    $_SESSION["rlocal"]=burbuja($_SESSION["rlocal"]);
     foreach ($_SESSION["rlocal"] as $value) {
       echo "<tr>";
       echo "<td class='ra'>".$value[0]."</td><td class='ra'>  ".$value[1]."</td>";
