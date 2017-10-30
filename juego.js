@@ -75,7 +75,7 @@ function addEventClickListener(){
 function finJuego(){
 
 	setTimeout(function(){
-		alert("fi juego");
+		alert("Fin del juego");
 		document.getElementById("hnombre").value=nombre;
 		document.getElementById("hscore").value=score;
 		document.getElementById("hsend").form.submit();

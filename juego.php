@@ -76,10 +76,9 @@
       <input type="Submit" id="hsend"/>
     </form>';
    ?>
-
-   <h2>MTG Memory</h2>
-     <?php
-      echo "<a href='tablero.php'>BACK</a>";
+   <div class="contenedor mem">
+   <?php
+      echo "<a href='tablero.php' class='rank'>BACK</a>";
       echo "<h3>Intentos: <span id='intentos'></span> Nombre: ".$nombre."</h3>";
       echo "<table>";
       for($x=1; $x<=$filas; $x++){
@@ -96,7 +95,8 @@
         echo "</tr>";
       }
       echo "</table>";
-     ?>
+    ?>
+  </div>
 
 
 </body>

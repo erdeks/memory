@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/main.css" />
   <title>Ranquing</title>
 </head>
-<body>
+<body class="ranquing">
   <?php
     $fichero = fopen("puntuaciones.txt", "r");
 
@@ -30,42 +30,44 @@
     }
     fclose($fichero);
     echo "<div class='mundial'>";
-    echo "<h3>Ranquing Mundial</h3>";
-    echo "<table>";
+    echo "<h2>Ranquing Mundial</h2>";
+    echo "<table class='r'>";
     echo "<tr>";
-    echo "<th>Jugador</th>";
-    echo "<th>Intentos</th>";
+    echo "<th class='cabecera'>Jugador</th>";
+    echo "<th class='cabecera'>Intentos</th>";
     echo "</tr>";
     foreach ($contenido as $value) {
       echo "<tr>";
-      echo "<td>".$value[0]."</td><td>  ".$value[1]."</td>";
+      echo "<td class='ra'>".$value[0]."</td><td class='ra'>  ".$value[1]."</td>";
       echo "</tr>";
     }
     echo "</table>";
     echo "</div>";
 
-    echo "<div class='mundial'>";
-    echo "</table>";
-    echo "<h3>Ranquing Local</h3>";
-    echo "<table>";
+    echo "<div class='local'>";
+    echo "<h2>Ranquing Local</h2>";
+    echo "<table class='r'>";
     echo "<tr>";
-    echo "<th>Jugador</th>";
-    echo "<th>Intentos</th>";
+    echo "<th class='cabecera'>Jugador</th>";
+    echo "<th class='cabecera'>Intentos</th>";
     echo "</tr>";
     foreach ($_SESSION["rlocal"] as $value) {
       echo "<tr>";
-      echo "<td>".$value[0]."</td><td>  ".$value[1]."</td>";
+      echo "<td class='ra'>".$value[0]."</td><td class='ra'>  ".$value[1]."</td>";
       echo "</tr>";
     }
     echo "</table>";
     echo "</div>";
    ?>
-  <h4>Quieres Jugar Otra Vez? </h4>
-  <form action="juego.php" method="post">
-    <input name="nombre" placeholder="Nombre: "></br></br>
-    <input name="filas" placeholder="Numero de Filas: "/></br></br>
-    <input name="columns" placeholder="Numero de Columnas: "/></br></br>
-    <input type="Submit" value="Start Game"/>
-  </form>
+  <div class="contenedor center">
+    <h3>Quieres Jugar Otra Vez? </h3>
+    <form action="juego.php" method="post">
+      <input name="nombre" placeholder="Nombre: "></br></br>
+      <input name="filas" placeholder="Numero de Filas: "/></br></br>
+      <input name="columns" placeholder="Numero de Columnas: "/></br></br>
+      <input type="Submit" class="start" value="Start Game"/>
+      <a href="tablero.php" class="rank">Home</a>
+    </form>
+  </div>
 </body>
 </html>
